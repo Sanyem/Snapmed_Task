@@ -1,0 +1,1 @@
+web: gunicorn snapmed.wsgi --log-file -
