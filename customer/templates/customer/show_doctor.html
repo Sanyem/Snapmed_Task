@@ -1,0 +1,61 @@
+
+
+
+
+
+{% extends 'customer/sidebar.html' %}
+{% load static %}
+
+
+
+
+
+   {% block head-scripts %}
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+   <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+   <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+   <link href='http://fonts.googleapis.com/css?family=Raleway:400,200' rel='stylesheet' type='text/css'>
+   <link rel="stylesheet" type="text/css" href="{% static 'doctor/profile/css/profile.css' %}">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+   {% endblock %}
+   <!------ Include the above in your HEAD tag ---------->
+{% block body %}
+<div class="container">
+    <div class="row login_box">
+        <div class="col-md-12 col-xs-12" align="center">
+            <div class="line"><h3>Show Doctors</h3></div>
+
+            <!-- <h3>The doctors on our website are:</h3> -->
+            
+            {% if docs_count > 0 %}
+            <h3>The Doctors on our website are:</h3>
+            <br>
+            {% else %}
+            <h3>No Doctor as of yet on our website</h3>
+            {% endif %}
+
+            {% for doc in docs %}
+
+            <h4>{{doc.first_name}} {{doc.last_name}} <button><a href="{% url 'customer:book_slot' doc.id %}">Book an appointment</a></button></h4>
+
+            {% endfor %}
+
+
+            <!-- <br><br>
+            {% if count != 0 %}
+            {% for i in slots %}
+
+           <h4>{{i.slot_start_time}} -> {{i.slot_end_time}}  <button><a href="{% url 'doctor:edit_slot' i.id message %}">Edit Slot</a></button><button><a href="{% url 'doctor:delete_slot' i.id %}">Delete Slot</a></button></h4>
+
+            {% endfor %}
+            {% else %}
+            <h2>No slots for the selected date</h2>
+            {% endif %} -->
+
+        
+            
+    </div>
+</div>
+
+{% endblock %}

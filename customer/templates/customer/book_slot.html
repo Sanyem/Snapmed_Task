@@ -1,0 +1,115 @@
+
+
+
+
+
+
+
+ {% extends 'customer/sidebar.html' %}
+ {% load static %}
+ 
+
+ 
+
+	{% block head-scripts %}
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,200' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="{% static 'doctor/profile/css/profile.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    {% endblock %}
+    <!------ Include the above in your HEAD tag ---------->
+{% block body %}
+ <div class="container">
+     <div class="row login_box">
+         <div class="col-md-12 col-xs-12" align="center">
+             <div class="line"><h3>Edit Slot</h3></div>
+             <!-- <div class="outter"><img src="{{user.pic.url}}" class="image-circle"/></div>   
+             <h1>{{user.first_name}} {{user.last_name}}</h1>
+             <span>{{user.email}}</span> -->
+             <h3>{{message}}</h3>
+             <form action="{% url 'customer:book_slot' doc.id %}" method="POST" enctype="multipart/form-data">
+            
+                {% csrf_token %}   
+                <input type="hidden" name="id" value="{{slot.id}}">
+                <div class="col-md-5 col-xs-5">
+                        <h3>Slot Date</h3>
+                </div>       
+                <div class="col-md-7 col-xs-7">
+                    <h3><input class="form-control" type="date" name="slot_date" id="slot_date" required="" value="{{slot_date}}"></h3>
+                </div>
+                
+            <h1><input type="submit" class="form-control" name="submit" value="Check Slots" style="background-color:lightslategray;"></h1>
+
+            </form>
+
+
+        <h3>The slots for the given date are:</h3>
+
+        {% if slots %}
+
+        {% for i in slots %}
+        
+        
+
+        {% if i.is_booked %}
+        <h3> {{i.slot_start_time}} -> {{i.slot_end_time}} -> Slot Unavailable</h3>
+        {% else %}
+        <h3>{{i.slot_start_time}} -> {{i.slot_end_time}}  <button><a href="{% url 'customer:book_particular_slot' i.id %}">Book The Slot</a></button></h3>
+        {% endif %}
+        
+
+        {% endfor %}
+        
+        {% else %}
+        <h3>No slots for the selected date</h3>
+        {% endif %}
+
+         
+             
+     </div>
+ </div>
+
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+        $(function(){
+        var dtToday = new Date();
+        
+        var month = dtToday.getMonth() + 1;
+        var day = dtToday.getDate();
+        var year = dtToday.getFullYear();
+        if(month < 10)
+            month = '0' + month.toString();
+        if(day < 10)
+            day = '0' + day.toString();
+        
+        var maxDate = year + '-' + month + '-' + day;
+        
+        $('#slot_date').attr('min', maxDate);
+    });
+        </script>
+    
+    
+            <script>
+                $(document).ready(function () {
+      
+      $.getScript('http://server/Forms/js/moment.js');
+    
+      $('.slot_end_time').on('blur','input', function() {
+        var startTime = moment($('.slot_start_time input').val(), ["h:mm A"]).format("HH:mm");
+        var endTime = moment($('.slot_end_time input').val(), ["h:mm A"]).format("HH:mm");
+        // $('#slot_end_time').attr('minTime', startTime);
+        var msgText = ("Closing time must be after " + $('.slot_start_time input').val() + ".  Please update time(s)");
+        if (startTime > endTime) {
+          alert(msgText);
+        }
+      });
+    
+    });
+            </script>
+	{% endblock %}

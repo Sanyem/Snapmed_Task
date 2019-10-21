@@ -1,0 +1,3 @@
+pygrphviz
+django-extensions
+psycopg2

@@ -1,0 +1,51 @@
+
+{% extends 'customer/sidebar.html' %}
+{% load static %}
+<!-- 
+Edit Doctor Profile
+<form action="{% url 'customer:edit_profile' %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+First Name: <input type="text" name="first_name" value="{{user.first_name}}">
+Last Name: <input type="text" name="last_name" value="{{user.last_name}}">
+Email: <input type="email" name="email" value="{{user.email}}" readonly>
+Image <img src="{{user.pic.url}}" width="100" height="100">
+Upload New Image : <input type="file" name="pic" accept="image/*" value="{{user.pic.url}}">
+<br>
+<input type="submit" name="submit">
+</form> -->
+
+
+
+   {% block head-scripts %}
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+   <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+   <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+   <link href='http://fonts.googleapis.com/css?family=Raleway:400,200' rel='stylesheet' type='text/css'>
+   <link rel="stylesheet" type="text/css" href="{% static 'doctor/profile/css/profile.css' %}">
+
+   {% endblock %}
+   <!------ Include the above in your HEAD tag ---------->
+{% block body %}
+<div class="container">
+    <div class="row login_box">
+        <div class="col-md-12 col-xs-12" align="center">
+            <div class="line"><h3>Edit Profile</h3></div>
+            <div class="outter"><img src="{{user.pic.url}}" class="image-circle"/></div> 
+            <form action="{% url 'customer:edit_profile' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}              
+            <h1>
+                <input type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name" value="{{user.first_name}}" required="">
+                <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name" value="{{user.last_name}}" required="">
+            </h1>
+            <h1>{{user.email}}</h1>
+            <h1><input type="file" class="form-control" name="pic" accept="image/*" value="{{user.pic.url}}"></h1>
+            <h1><input type="submit" class="form-control" name="submit" value="Edit Profile" style="background-color:lightslategray;"></h1>
+
+            </form>
+        
+            
+    </div>
+</div>
+
+{% endblock %}

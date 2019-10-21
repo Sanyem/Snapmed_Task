@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+        {% load static %}
+  <head>
+    <meta charset="utf-8">
+    <title>{% block page-title %}Snapmed{% endblock %}</title>
+    <meta name="description" content="This one page example has a fixed navbar and full page height sections. Each section is vertically centered on larger screens, and then stack responsively on smaller screens. Scrollspy is used to activate the current menu item. This layout also has a contact form example. Uses animate.css, FontAwesome, Google Fonts (Lato and Bitter) and Bootstrap." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Codeply">
+
+
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="{% static 'doctor/sidebar/css/styles.css' %}" />
+    {% block head-scripts %} {% endblock %}
+  </head>
+  <body >
+    <nav class="navbar navbar-trans navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapsible">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand text-danger" href="#">SNAPMED</a>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-collapsible">
+            <ul class="nav navbar-nav navbar-left">
+                <li><a href="{% url 'doctor:add_slot' message %}">Add Slot</a></li>
+                <li><a href="{% url 'doctor:view_slot' %}">View Slot</a></li>
+                <li><a href="{% url 'doctor:edit_doc_profile' %}">Edit Profile</a></li>
+                <li><a href="{% url 'doctor:view_doc_profile' %}">View Profile</a></li>
+                <li><a href="{% url 'UserAuth:logout' %}">Logout</a></li>
+                <li>&nbsp;</li>
+            </ul>
+          
+        </div>
+    </div>
+</nav>
+
+{% block body %}
+{% endblock %}
+
+
+
+    
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    
+    <script src="{% static 'doctor/sidebar/js/scripts.js' %}"></script>
+
+    {% block scripts %}
+	{% endblock %}
+	{% block modals %}
+	{% endblock %}
+	{% block style %}
+	{% endblock %}
+  </body>
+</html>
