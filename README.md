@@ -31,4 +31,9 @@ Design a small web application for an online doctor consultation which can be us
 ## SAMPLE URLS
 -  Admin Panel: https://guarded-reaches-45302.herokuapp.com/admin/
 
-
+## To run in your own system
+- Clone the github repo
+- Create a virtual environment
+- Install all the requirements from requirements.txt (Note = Some of the requirements were only for hosting on heroku)
+- Run the django project
+- Enjoy
