@@ -6,3 +6,4 @@ gunicorn
 django-heroku
 whitenoise==4.1.4
 Pillow==4.3.0
+dj-database-url
